@@ -1,6 +1,6 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import Image from "next/image";
+import styles from "../styles/Home.module.css";
 
 export default function Home() {
   return (
@@ -12,44 +12,52 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        <h1 className={styles.title}>Space Jelly Shop</h1>
 
         <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
+          The best space jellyfish swag on the web!
         </p>
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+        <ul className={styles.grid}>
+          <li className={styles.card}>
+            <a href="#" className={styles.card}>
+              <img
+                src="images/spacejelly-tshirt.jpg"
+                alt="Space Jelly Tshirt"
+              />
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
+              <h2>Space Jelly Tshirt</h2>
+              <p>
+                Bring Cosmo the space Jellyfish to your wardrobe with this high
+                quality tshirt.
+              </p>
+            </a>
+          </li>
+          <li className={styles.card}>
+            <a href="#" className={styles.card}>
+              <img
+                src="images/spacejelly-stickers.jpg"
+                alt="Space Jelly Stickers"
+              />
 
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
+              <h2>Space Jelly Stickers</h2>
+              <p>
+                Bring Cosmo the space Jellyfish to your wardrobe with this high
+                quality tshirt.
+              </p>
+            </a>
+          </li>
+          <li className={styles.card}>
+            <a href="#" className={styles.card}>
+              <img src="images/spacejelly-combo.jpg" alt="Space Jelly Combo" />
 
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+              <h2>Space Jelly Combo</h2>
+              <p>
+                Show your love for Cosmo with a tshirt and sticker combo pack!
+              </p>
+            </a>
+          </li>
+        </ul>
       </main>
 
       <footer className={styles.footer}>
@@ -58,12 +66,12 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
+          Powered by{" "}
           <span className={styles.logo}>
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
         </a>
       </footer>
     </div>
-  )
+  );
 }
