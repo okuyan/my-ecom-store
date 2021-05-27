@@ -2,6 +2,8 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
+import products from "../products.json";
+
 export default function Home() {
   return (
     <div className={styles.container}>
@@ -19,44 +21,20 @@ export default function Home() {
         </p>
 
         <ul className={styles.grid}>
-          <li className={styles.card}>
-            <a href="#" className={styles.card}>
-              <img
-                src="images/spacejelly-tshirt.jpg"
-                alt="Space Jelly Tshirt"
-              />
+          {products.map((product) => {
+            const { id, title, description, image, price } = product;
+            return (
+              <li className={styles.card}>
+                <a href="#" className={styles.card}>
+                  <img src={image} alt={title} />
 
-              <h2>Space Jelly Tshirt</h2>
-              <p>
-                Bring Cosmo the space Jellyfish to your wardrobe with this high
-                quality tshirt.
-              </p>
-            </a>
-          </li>
-          <li className={styles.card}>
-            <a href="#" className={styles.card}>
-              <img
-                src="images/spacejelly-stickers.jpg"
-                alt="Space Jelly Stickers"
-              />
-
-              <h2>Space Jelly Stickers</h2>
-              <p>
-                Bring Cosmo the space Jellyfish to your wardrobe with this high
-                quality tshirt.
-              </p>
-            </a>
-          </li>
-          <li className={styles.card}>
-            <a href="#" className={styles.card}>
-              <img src="images/spacejelly-combo.jpg" alt="Space Jelly Combo" />
-
-              <h2>Space Jelly Combo</h2>
-              <p>
-                Show your love for Cosmo with a tshirt and sticker combo pack!
-              </p>
-            </a>
-          </li>
+                  <h2>{title}</h2>
+                  <p>${price}</p>
+                  <p>{description}</p>
+                </a>
+              </li>
+            );
+          })}
         </ul>
       </main>
 
