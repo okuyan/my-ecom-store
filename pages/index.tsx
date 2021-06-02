@@ -5,6 +5,10 @@ import styles from "../styles/Home.module.css";
 import products from "../products.json";
 
 export default function Home() {
+  console.log(
+    "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY",
+    process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+  );
   return (
     <div className={styles.container}>
       <Head>
@@ -24,7 +28,7 @@ export default function Home() {
           {products.map((product) => {
             const { id, title, description, image, price } = product;
             return (
-              <li className={styles.card}>
+              <li key={id} className={styles.card}>
                 <a href="#" className={styles.card}>
                   <img src={image} alt={title} />
 
