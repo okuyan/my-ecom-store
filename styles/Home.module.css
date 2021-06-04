@@ -1,13 +1,3 @@
-/**
- * @lesson-02-solution Exercise 4
- * We can update each .card element to take up 1/3 of the
- * available space when above 960px. Because we added
- * an unordered list, we can use list-style to remove
- * the default list styles. We can also remove the hover
- * effect from the default card styles and apply them only
- * to the image when the card is hovered over.
- */
-
 .container {
   min-height: 100vh;
   padding: 0 0.5rem;
@@ -140,4 +130,24 @@
     width: 100%;
     flex-direction: column;
   }
+}
+
+/**
+ * @lesson-08-solution Exercise 1
+ * While we can do whatever we want with our button, adding
+ * a dark background with white text along with making it
+ * a bit bigger will go a long way in helping our customers.
+ */
+
+.button {
+  color: white;
+  font-family: inherit;
+  font-size: 0.9em;
+  font-weight: 700;
+  background-color: blueviolet;
+  padding: 0.8em 1.4em;
+  border-radius: 0.2em;
+  border: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
 }
