@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
+import { initiateCheckout } from "../lib/payments";
 
 import products from "../products.json";
 
@@ -32,6 +33,23 @@ export default function Home() {
                   <p>${price}</p>
                   <p>{description}</p>
                 </a>
+                <p>
+                  <button
+                    className={styles.button}
+                    onClick={() => {
+                      initiateCheckout({
+                        lineItems: [
+                          {
+                            price: id,
+                            quantity: 1,
+                          },
+                        ],
+                      });
+                    }}
+                  >
+                    Buy now!
+                  </button>
+                </p>
               </li>
             );
           })}
