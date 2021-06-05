@@ -1,11 +1,69 @@
+import { useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { initiateCheckout } from "../lib/payments";
-
 import products from "../products.json";
 
+interface IProduct {
+  id: string;
+  quantity: number;
+}
+type TCart = {
+  products: {
+    [id: string]: IProduct;
+  };
+};
+
+const defaultCart = {
+  products: {},
+} as TCart;
+
 export default function Home() {
+  const [cart, updateCart] = useState(defaultCart);
+
+  const cartItems =
+    cart.products &&
+    Object.keys(cart.products).map((key) => {
+      // Find the product data in products.json
+      const product = products.find(({ id }) => id === key);
+      return {
+        ...cart.products[key],
+        pricePerItem: parseInt(product!.price),
+      };
+    });
+  const subtotal = cartItems.reduce(
+    (acc, cur) => acc + cur!.pricePerItem * cur!.quantity,
+    0
+  );
+
+  const totalItems = cartItems.reduce((acc, cur) => acc + cur!.quantity, 0);
+
+  function checkout() {
+    initiateCheckout({
+      lineItems: cartItems.map((item) => ({
+        price: item.id,
+        quantity: item.quantity,
+      })),
+    });
+  }
+
+  function addCart({ id } = { id: "" }) {
+    updateCart((prev) => {
+      let cart = { ...prev };
+
+      if (cart.products[id]) {
+        cart.products[id].quantity += 1;
+      } else {
+        cart.products[id] = {
+          id,
+          quantity: 1,
+        };
+      }
+      return cart;
+    });
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -19,6 +77,21 @@ export default function Home() {
 
         <p className={styles.description}>
           The best space jellyfish swag on the web!
+        </p>
+
+        <p className={styles.description}>
+          <strong>Itmes:</strong> {totalItems}
+          <br />
+          <strong>Total Cost:</strong> ${subtotal}
+          <br />
+          <button
+            className={styles.button}
+            onClick={() => {
+              checkout();
+            }}
+          >
+            Check Out
+          </button>
         </p>
 
         <ul className={styles.grid}>
@@ -37,17 +110,10 @@ export default function Home() {
                   <button
                     className={styles.button}
                     onClick={() => {
-                      initiateCheckout({
-                        lineItems: [
-                          {
-                            price: id,
-                            quantity: 1,
-                          },
-                        ],
-                      });
+                      addCart({ id });
                     }}
                   >
-                    Buy now!
+                    Add to Cart
                   </button>
                 </p>
               </li>
