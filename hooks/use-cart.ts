@@ -26,6 +26,19 @@ const defaultCart = {
 export function useCartState() {
   const [cart, updateCart] = useState(defaultCart);
 
+  useEffect(() => {
+    const cartFromStorage = window.localStorage.getItem("spacejelly_cart");
+    const data = cartFromStorage && JSON.parse(cartFromStorage);
+    if (data) {
+      updateCart(data);
+    }
+  }, []); // ComponentDidMount()
+
+  useEffect(() => {
+    const data = JSON.stringify(cart);
+    window.localStorage.setItem("spacejelly_cart", data);
+  }, [cart]);
+
   const cartItems =
     cart.products &&
     Object.keys(cart.products).map((key) => {
@@ -33,7 +46,7 @@ export function useCartState() {
       const product = products.find(({ id }) => id === key);
       return {
         ...cart.products[key],
-        pricePerItem: parseInt(product!.price),
+        pricePerItem: product!.price,
       };
     });
   const subtotal = cartItems.reduce(
@@ -76,7 +89,6 @@ export function useCartState() {
   };
 }
 
-//export const CartContext = createContext<TCartContext | undefined>(undefined);
 export const CartContext = createContext<TCartContext | undefined>(undefined);
 
 export function useCart() {
