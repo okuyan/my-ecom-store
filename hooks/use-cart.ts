@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, createContext, useContext, useEffect } from "react";
 import { initiateCheckout } from "../lib/payments";
 import products from "../products.json";
 
@@ -13,11 +13,17 @@ type Cart = {
   };
 };
 
+type TCartContext = {
+  addCart: ({ id }: { id: string }) => void;
+  checkout: () => void;
+  subtotal: number;
+};
+
 const defaultCart = {
   products: {},
 } as Cart;
 
-export default function useCart() {
+export function useCartState() {
   const [cart, updateCart] = useState(defaultCart);
 
   const cartItems =
@@ -68,4 +74,16 @@ export default function useCart() {
     totalItems,
     checkout,
   };
+}
+
+//export const CartContext = createContext<TCartContext | undefined>(undefined);
+export const CartContext = createContext<TCartContext | undefined>(undefined);
+
+export function useCart() {
+  const cart = useContext(CartContext);
+  if (cart === undefined) {
+    throw new Error("useCart must be used within a CartContextProvider");
+  }
+
+  return cart;
 }
