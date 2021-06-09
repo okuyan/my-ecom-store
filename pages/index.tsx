@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
@@ -27,13 +28,16 @@ export default function Home() {
             const { id, title, description, image, price } = product;
             return (
               <li key={id} className={styles.card}>
-                <a href="#" className={styles.card}>
-                  <img src={image} alt={title} />
+                <Link href={`/products/${id}`}>
+                  <a>
+                    <img src={image} alt={title} />
 
-                  <h2>{title}</h2>
-                  <p>${price}</p>
-                  <p>{description}</p>
-                </a>
+                    <h2>{title}</h2>
+                    <p>${price}</p>
+                    <p>{description}</p>
+                  </a>
+                </Link>
+
                 <p>
                   <button
                     className={styles.button}
