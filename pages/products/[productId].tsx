@@ -18,15 +18,6 @@ export default function Product({ product }: Props) {
   const { addCart } = useCart();
   const { id, title, description, image, price } = product;
 
-  {
-    /**
-     * @lesson-13-todo Exercise 5
-     * In other parts of our app, we used a custom hook
-     * to import global data. How can we use that to
-     * import a function to add items to our cart?
-     */
-  }
-
   return (
     <div className={styles.container}>
       <Head>
@@ -46,12 +37,6 @@ export default function Product({ product }: Props) {
 
           <p className={styles.description}>${price.toFixed(2)}</p>
 
-          {/**
-           * @lesson-13-todo Exercise 5
-           * Once we have our add to cart function, how can
-           * we add an item to our customer's cart any time
-           * they click the Buy button?
-           */}
           <p>
             <button
               className={styles.button}
@@ -77,25 +62,6 @@ export default function Product({ product }: Props) {
       </footer>
     </div>
   );
-}
-
-{
-  /**
-   * @lesson-13-todo Exercise 4
-   * Just defining page paths doesn't give us the data for
-   * each page, we need a way to look up our product data
-   * and pass it to the page. What API can we use to define
-   * our page's props?
-   */
-}
-
-{
-  /**
-   * @lesson-13-todo Exercise 3
-   * Once we have a dynamic route, we need to tell Next.js
-   * what paths are actually available to visit. What API
-   * can we use to define our static paths?
-   */
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
