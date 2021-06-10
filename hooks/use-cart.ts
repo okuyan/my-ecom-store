@@ -13,10 +13,17 @@ type Cart = {
   };
 };
 
+interface ICartItem {
+  id: string;
+  quantity: number;
+  pricePerItem: number;
+}
+
 type TCartContext = {
   addCart: ({ id }: { id: string }) => void;
   checkout: () => void;
   subtotal: number;
+  cartItems: ICartItem[];
 };
 
 const defaultCart = {
@@ -82,6 +89,7 @@ export function useCartState() {
   }
 
   return {
+    cartItems,
     addCart,
     subtotal,
     totalItems,
