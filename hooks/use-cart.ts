@@ -22,6 +22,7 @@ interface ICartItem {
 type TCartContext = {
   addCart: ({ id }: { id: string }) => void;
   checkout: () => void;
+  updateItem: ({ id, quantity }: { id: string; quantity: number }) => void;
   subtotal: number;
   cartItems: ICartItem[];
 };
@@ -88,12 +89,24 @@ export function useCartState() {
     });
   }
 
+  function updateItem({ id, quantity }: { id: string; quantity: number }) {
+    updateCart((prev) => {
+      let cart = { ...prev };
+
+      if (cart.products[id]) {
+        cart.products[id].quantity = quantity;
+      }
+      return cart;
+    });
+  }
+
   return {
     cartItems,
     addCart,
     subtotal,
     totalItems,
     checkout,
+    updateItem,
   };
 }
 

@@ -26,12 +26,41 @@ const columns = [
   },
 ];
 
-export default function Home() {
-  const { checkout, cartItems } = useCart();
+export default function Cart() {
+  const { checkout, cartItems, updateItem } = useCart();
   const data = cartItems.map((item) => {
     const product = products.find(({ id }) => id === item.id);
+    const Quantity = () => {
+      return (
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            const { currentTarget } = e;
+            const inputs = Array.from(currentTarget.elements);
+            const targetInput = inputs.find(
+              (input) => (input as HTMLInputElement).name === "quantity"
+            );
+            const quantity = parseInt((targetInput as HTMLInputElement).value);
+
+            updateItem({
+              id: item.id,
+              quantity,
+            });
+          }}
+        >
+          <input
+            type="number"
+            name="quantity"
+            min={0}
+            defaultValue={item.quantity}
+          />
+          <button>Update</button>
+        </form>
+      );
+    };
     return {
       ...item,
+      quantity: <Quantity />,
       total: item.quantity * item.pricePerItem,
       title: product?.title,
     };
