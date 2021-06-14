@@ -92,9 +92,12 @@ export function useCartState() {
   function updateItem({ id, quantity }: { id: string; quantity: number }) {
     updateCart((prev) => {
       let cart = { ...prev };
-
       if (cart.products[id]) {
-        cart.products[id].quantity = quantity;
+        if (quantity > 0) {
+          cart.products[id].quantity = quantity;
+        } else {
+          delete cart.products[id];
+        }
       }
       return cart;
     });
